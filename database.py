@@ -8,5 +8,18 @@ Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-def function(parameter):
-    pass
+def create_applicant(id, name, age, subject):
+  new_applicant = Applicant(
+    id=id,
+    name=name,
+    age=age,
+    subject=subject)
+  session.add(new_applicant)
+  session.commit()
+
+def get_all_applicants():
+    applicants = session.query(Applicant).all()
+    return applicants
+
+
+def save_to_database():
